@@ -16,6 +16,9 @@
     NSTextField     *currentTitleField;
     ISSeparatorLabel *currentLeftNavButton;
     CGFloat         startX;
+    
+    // animation
+    NSMutableArray *removingView;
 }
 
 - (void)addToWindow:(INAppStoreWindow*)window;

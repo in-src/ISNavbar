@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 IN-SRC Limit. All rights reserved.
 //
 
+#import <QuartzCore/CAAnimation.h>
+#import <QuartzCore/CAMediaTimingFunction.h>
+#import <QuartzCore/CATransaction.h>
+
 #import "InAppStoreWindow.h"
 #import "ISSeparatorLabel.h"
 
@@ -13,14 +17,27 @@
 
 #define MARGIN 16
 
+#define REMOVE_TO_LEFT 0
+#define REMOVE_TO_RIGHT 1
+#define ADD_FROM_LEFT 0
+#define ADD_FROM_RIGHT 1
+
 @implementation ISNavbarView
 -(id)initWithFrame:(NSRect)frameRect
 {
     self = [super initWithFrame:frameRect];
     if (self) {
         titles = [[NSMutableArray alloc] init];
+        removingView = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [titles release];
+    [removingView release];
+    [super dealloc];
 }
 
 - (NSTextField *)buildTitleField:(NSString *)title
@@ -55,22 +72,32 @@
 {
     NSTextField *titleField;
     titleField = [self buildTitleField:title];
+    
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setCompletionHandler:^{
+        [self afterAnimation];
+        [self addSubview:titleField];
+        currentTitleField = titleField;
+    }];
+    [[NSAnimationContext currentContext] setDuration:0.2];
+    [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+
     if (currentTitleField) {
-        [currentTitleField removeFromSuperview];
+        [self removeView:currentTitleField direction:REMOVE_TO_LEFT];
         
         if (currentLeftNavButton) {
-            [currentLeftNavButton removeFromSuperview];
+            [self removeView:currentLeftNavButton direction:REMOVE_TO_LEFT];
         }
         
         NSString *currentTitle = [titles lastObject];
         ISSeparatorLabel *navButton;
         navButton = [self buildNavButtonWithTitle:currentTitle];
+        [self addView:navButton direction:ADD_FROM_RIGHT];
         [self addSubview:navButton];
         currentLeftNavButton = navButton;
     }
     [titles addObject:title];
-    [self addSubview:titleField];
-    currentTitleField = titleField;
+    [NSAnimationContext endGrouping];
 }
 
 - (void)popTitle
@@ -79,22 +106,29 @@
         return;
     }
     [titles removeLastObject];
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setCompletionHandler:^{
+        [self afterAnimation];
+        if ([titles count] > 1) {
+            currentTitleField = [self buildTitleField:[titles lastObject]];
+            [self addSubview:currentTitleField];
+        }
+    }];
+    [[NSAnimationContext currentContext] setDuration:0.2];
+    [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     if (currentTitleField) {
-        [currentTitleField removeFromSuperview];
+        [self removeView:currentTitleField direction:REMOVE_TO_RIGHT];
         currentTitleField = nil;
     }
     if (currentLeftNavButton) {
-        [currentLeftNavButton removeFromSuperview];
+        [self removeView:currentLeftNavButton direction:REMOVE_TO_RIGHT];
         currentLeftNavButton = nil;
-    }
-    if ([titles count] > 1) {
-        currentTitleField = [self buildTitleField:[titles lastObject]];
-        [self addSubview:currentTitleField];
     }
     if ([titles count] > 2) {
         currentLeftNavButton = [self buildNavButtonWithTitle:[titles objectAtIndex:([titles count] - 2)]];
-        [self addSubview:currentLeftNavButton];
+        [self addView:currentLeftNavButton direction:ADD_FROM_LEFT];
     }
+    [NSAnimationContext endGrouping];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -111,5 +145,44 @@
     [self setFrame:frame];
     [self setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
     [aWindow.titleBarView addSubview:self];
+}
+
+#pragma mark -
+#pragma mark animation
+- (void)removeView:(NSView*)view direction:(NSInteger)direction
+{
+    [removingView addObject:view];
+    NSRect frame = view.frame;
+    if (direction == REMOVE_TO_RIGHT) {
+        frame.origin.x = self.bounds.size.width;
+    }
+    else {
+        frame.origin.x = 0 - frame.size.width;
+    }
+    [[view animator] setFrame:frame];
+}
+
+- (void)addView:(NSView*)view direction:(NSInteger)direction
+{
+    NSRect origFrame = view.frame;
+    NSRect startFrame;
+    if (direction == ADD_FROM_LEFT) {
+        startFrame = NSMakeRect(0, 0, origFrame.size.width, origFrame.size.height);
+    }
+    else {
+        startFrame = NSMakeRect(self.bounds.size.width/2.0, 0, origFrame.size.width, origFrame.size.height);
+    }
+    
+    view.frame = startFrame;
+    [self addSubview:view];
+    [[view animator] setFrame:origFrame];
+}
+
+- (void)afterAnimation
+{
+    for (NSView* view in removingView) {
+        [view removeFromSuperview];
+    }
+    [removingView removeAllObjects];
 }
 @end
