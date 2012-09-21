@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface ISSeparatorLabel : NSButton
+
+- (id) initWithTitle:(NSString*)title;
+
 - (NSColor *)textColor;
 - (void)setTextColor:(NSColor *)textColor;
 @end

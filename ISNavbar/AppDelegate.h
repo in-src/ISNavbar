@@ -15,5 +15,6 @@
 }
 @property (assign) IBOutlet NSWindow *window;
 
-- (IBAction)doAction:(id)sender;
+- (IBAction)pushTitle:(id)sender;
+- (IBAction)popTitle:(id)sender;
 @end

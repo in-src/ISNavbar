@@ -10,6 +10,15 @@
 
 @implementation ISSeparatorLabel
 
+- (id) initWithTitle:(NSString*)title
+{
+    self = [super initWithFrame:NSZeroRect];
+    if (self) {
+        [self setTitle:title];
+    }
+    return self;
+}
+
 - (NSColor *)textColor
 {
     NSAttributedString *attrTitle = [self attributedTitle];

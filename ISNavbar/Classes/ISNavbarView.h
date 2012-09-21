@@ -8,11 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 @class INAppStoreWindow;
+@class ISSeparatorLabel;
 
 @interface ISNavbarView : NSView
 {
     NSMutableArray *titles;
     NSTextField     *currentTitleField;
+    ISSeparatorLabel *currentLeftNavButton;
     CGFloat         startX;
 }
 

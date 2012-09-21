@@ -26,10 +26,14 @@
     [navbarView addToWindow:aWindow];
 }
 
-- (IBAction)doAction:(id)sender
+- (IBAction)pushTitle:(id)sender
 {
     NSString *title = [NSString stringWithFormat:@"Title %ld", counter];
     counter += 1;
     [navbarView pushTitle:title];
+}
+
+- (IBAction)popTitle:(id)sender {
+    [navbarView popTitle];
 }
 @end
