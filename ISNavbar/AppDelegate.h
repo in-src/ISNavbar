@@ -9,7 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
-
+{
+    ISNavbarView *navbarView;
+    NSInteger counter;
+}
 @property (assign) IBOutlet NSWindow *window;
 
 - (IBAction)doAction:(id)sender;

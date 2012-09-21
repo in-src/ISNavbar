@@ -12,6 +12,8 @@
 @interface ISNavbarView : NSView
 {
     NSMutableArray *titles;
+    NSTextField     *currentTitleField;
+    CGFloat         startX;
 }
 
 - (void)addToWindow:(INAppStoreWindow*)window;
