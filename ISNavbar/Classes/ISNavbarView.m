@@ -70,14 +70,9 @@
 
 - (void)pushTitle:(NSString*)title
 {
-    NSTextField *titleField;
-    titleField = [self buildTitleField:title];
-    
     [NSAnimationContext beginGrouping];
     [[NSAnimationContext currentContext] setCompletionHandler:^{
         [self afterAnimation];
-        [self addSubview:titleField];
-        currentTitleField = titleField;
     }];
     [[NSAnimationContext currentContext] setDuration:0.2];
     [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
@@ -93,10 +88,14 @@
         ISSeparatorLabel *navButton;
         navButton = [self buildNavButtonWithTitle:currentTitle];
         [self addView:navButton direction:ADD_FROM_RIGHT];
-        [self addSubview:navButton];
         currentLeftNavButton = navButton;
     }
     [titles addObject:title];
+
+    NSTextField *titleField;
+    titleField = [self buildTitleField:title];
+    [self addView:titleField direction:ADD_FROM_RIGHT];
+    currentTitleField = titleField;
     [NSAnimationContext endGrouping];
 }
 
@@ -167,10 +166,10 @@
     NSRect origFrame = view.frame;
     NSRect startFrame;
     if (direction == ADD_FROM_LEFT) {
-        startFrame = NSMakeRect(0, 0, origFrame.size.width, origFrame.size.height);
+        startFrame = NSMakeRect(0, origFrame.origin.y, origFrame.size.width, origFrame.size.height);
     }
     else {
-        startFrame = NSMakeRect(self.bounds.size.width/2.0, 0, origFrame.size.width, origFrame.size.height);
+        startFrame = NSMakeRect(self.bounds.size.width,  origFrame.origin.y, origFrame.size.width, origFrame.size.height);
     }
     
     view.frame = startFrame;
