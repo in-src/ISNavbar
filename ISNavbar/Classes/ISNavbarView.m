@@ -65,6 +65,8 @@
     NSRect frame = navButton.frame;
     frame.origin.x = startX;
     navButton.frame = frame;
+    navButton.target = self;
+    navButton.action = @selector(pop:);
     return navButton;
 }
 
@@ -128,6 +130,11 @@
         [self addView:currentLeftNavButton direction:ADD_FROM_LEFT];
     }
     [NSAnimationContext endGrouping];
+}
+
+- (IBAction)pop:(id)sender
+{
+    [self popTitle];
 }
 
 - (void)drawRect:(NSRect)dirtyRect

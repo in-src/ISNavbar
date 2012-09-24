@@ -24,4 +24,5 @@
 - (void)addToWindow:(INAppStoreWindow*)window;
 - (void)pushTitle:(NSString*)title;
 - (void)popTitle;
+- (IBAction)pop:(id)sender;
 @end
