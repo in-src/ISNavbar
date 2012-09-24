@@ -17,12 +17,17 @@
 
 #define MARGIN 16
 
-#define REMOVE_TO_LEFT 0
+#define REMOVE_TO_LEFT  0
 #define REMOVE_TO_RIGHT 1
-#define ADD_FROM_LEFT 0
-#define ADD_FROM_RIGHT 1
+#define REMOVE_TO_MID   2
+
+#define ADD_FROM_LEFT   0
+#define ADD_FROM_RIGHT  1
+#define ADD_FROM_MID    2
 
 @implementation ISNavbarView
+@synthesize delegate;
+
 -(id)initWithFrame:(NSRect)frameRect
 {
     self = [super initWithFrame:frameRect];
@@ -72,6 +77,10 @@
 
 - (void)pushTitle:(NSString*)title
 {
+    if ([delegate respondsToSelector:@selector(willPush)]) {
+        [delegate willPush];
+    }
+    
     [NSAnimationContext beginGrouping];
     [[NSAnimationContext currentContext] setCompletionHandler:^{
         [self afterAnimation];
@@ -89,7 +98,7 @@
         NSString *currentTitle = [titles lastObject];
         ISSeparatorLabel *navButton;
         navButton = [self buildNavButtonWithTitle:currentTitle];
-        [self addView:navButton direction:ADD_FROM_RIGHT];
+        [self addView:navButton direction:ADD_FROM_MID];
         currentLeftNavButton = navButton;
     }
     [titles addObject:title];
@@ -106,6 +115,11 @@
     if ([titles count] == 0) {
         return;
     }
+
+    if ([delegate respondsToSelector:@selector(willPop)]) {
+        [delegate willPop];
+    }
+    
     [titles removeLastObject];
     [NSAnimationContext beginGrouping];
     [[NSAnimationContext currentContext] setCompletionHandler:^{
@@ -122,7 +136,7 @@
         currentTitleField = nil;
     }
     if (currentLeftNavButton) {
-        [self removeView:currentLeftNavButton direction:REMOVE_TO_RIGHT];
+        [self removeView:currentLeftNavButton direction:REMOVE_TO_MID];
         currentLeftNavButton = nil;
     }
     if ([titles count] > 2) {
@@ -162,6 +176,9 @@
     if (direction == REMOVE_TO_RIGHT) {
         frame.origin.x = self.bounds.size.width;
     }
+    else if (direction == REMOVE_TO_MID) {
+        frame.origin.x = (self.bounds.size.width - frame.size.width)/2.0;
+    }
     else {
         frame.origin.x = 0 - frame.size.width;
     }
@@ -174,6 +191,9 @@
     NSRect startFrame;
     if (direction == ADD_FROM_LEFT) {
         startFrame = NSMakeRect(0, origFrame.origin.y, origFrame.size.width, origFrame.size.height);
+    }
+    else if (direction == ADD_FROM_MID) {
+        startFrame = NSMakeRect((self.bounds.size.width - origFrame.size.width)/2.0, origFrame.origin.y, origFrame.size.width, origFrame.size.height);        
     }
     else {
         startFrame = NSMakeRect(self.bounds.size.width,  origFrame.origin.y, origFrame.size.width, origFrame.size.height);

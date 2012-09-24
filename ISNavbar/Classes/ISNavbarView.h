@@ -10,6 +10,13 @@
 @class INAppStoreWindow;
 @class ISSeparatorLabel;
 
+@protocol ISNavbarDelegate <NSObject>
+
+- (void)willPush;
+- (void)willPop;
+
+@end
+
 @interface ISNavbarView : NSView
 {
     NSMutableArray *titles;
@@ -19,7 +26,11 @@
     
     // animation
     NSMutableArray *removingView;
+    
+    id <ISNavbarDelegate> delegate;
 }
+
+@property (nonatomic, assign)  id <ISNavbarDelegate> delegate;
 
 - (void)addToWindow:(INAppStoreWindow*)window;
 - (void)pushTitle:(NSString*)title;
