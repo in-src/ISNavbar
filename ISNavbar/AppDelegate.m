@@ -36,4 +36,8 @@
 - (IBAction)popTitle:(id)sender {
     [navbarView popTitle];
 }
+
+- (IBAction)popToTop:(id)sender {
+    [navbarView popToTop];
+}
 @end

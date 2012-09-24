@@ -124,7 +124,7 @@
     [NSAnimationContext beginGrouping];
     [[NSAnimationContext currentContext] setCompletionHandler:^{
         [self afterAnimation];
-        if ([titles count] > 1) {
+        if ([titles count] >= 1) {
             currentTitleField = [self buildTitleField:[titles lastObject]];
             [self addSubview:currentTitleField];
         }
@@ -144,6 +144,14 @@
         [self addView:currentLeftNavButton direction:ADD_FROM_LEFT];
     }
     [NSAnimationContext endGrouping];
+}
+
+- (void)popToTop
+{
+    while ([titles count] > 2) {
+        [titles removeLastObject];
+    }
+    [self popTitle];
 }
 
 - (IBAction)pop:(id)sender

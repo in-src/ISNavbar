@@ -17,4 +17,5 @@
 
 - (IBAction)pushTitle:(id)sender;
 - (IBAction)popTitle:(id)sender;
+- (IBAction)popToTop:(id)sender;
 @end

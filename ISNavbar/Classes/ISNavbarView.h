@@ -33,7 +33,10 @@
 @property (nonatomic, assign)  id <ISNavbarDelegate> delegate;
 
 - (void)addToWindow:(INAppStoreWindow*)window;
+
 - (void)pushTitle:(NSString*)title;
 - (void)popTitle;
+- (void)popToTop;
+
 - (IBAction)pop:(id)sender;
 @end
