@@ -15,9 +15,9 @@
 		00876DCB16099BC100D47EC9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00876DCA16099BC100D47EC9 /* AppDelegate.m */; };
 		00876DCE16099BC100D47EC9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00876DCC16099BC100D47EC9 /* MainMenu.xib */; };
 		00A263E9160C52D8001089CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A263E8160C52D8001089CF /* QuartzCore.framework */; };
+		00C06B6516105444001501F0 /* NSBezierPath+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C06B6416105444001501F0 /* NSBezierPath+Ext.m */; };
 		00E7A2721609A35A00DF8332 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7A2711609A35A00DF8332 /* INAppStoreWindow.m */; };
 		00E7A2761609A52D00DF8332 /* ISSeparatorLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7A2751609A52D00DF8332 /* ISSeparatorLabel.m */; };
-		00E7A2821609BD4C00DF8332 /* divide.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E7A2811609BD4C00DF8332 /* divide.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +37,12 @@
 		00876DCA16099BC100D47EC9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		00876DCD16099BC100D47EC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		00A263E8160C52D8001089CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		00C06B6316105444001501F0 /* NSBezierPath+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+Ext.h"; sourceTree = "<group>"; };
+		00C06B6416105444001501F0 /* NSBezierPath+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+Ext.m"; sourceTree = "<group>"; };
 		00E7A2701609A35A00DF8332 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAppStoreWindow.h; path = vendor/INAppStoreWindow/INAppStoreWindow.h; sourceTree = SOURCE_ROOT; };
 		00E7A2711609A35A00DF8332 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAppStoreWindow.m; path = vendor/INAppStoreWindow/INAppStoreWindow.m; sourceTree = SOURCE_ROOT; };
 		00E7A2741609A52D00DF8332 /* ISSeparatorLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISSeparatorLabel.h; path = Classes/ISSeparatorLabel.h; sourceTree = "<group>"; };
 		00E7A2751609A52D00DF8332 /* ISSeparatorLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ISSeparatorLabel.m; path = Classes/ISSeparatorLabel.m; sourceTree = "<group>"; };
-		00E7A2811609BD4C00DF8332 /* divide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divide.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +111,6 @@
 		00876DBE16099BC100D47EC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				00E7A2771609A53C00DF8332 /* images */,
 				00876DBF16099BC100D47EC9 /* ISNavbar-Info.plist */,
 				00876DC016099BC100D47EC9 /* InfoPlist.strings */,
 				00876DC316099BC100D47EC9 /* main.m */,
@@ -136,16 +136,10 @@
 				00E7A2751609A52D00DF8332 /* ISSeparatorLabel.m */,
 				0028DE75160B076D0002E3AB /* ISNavbarView.h */,
 				0028DE76160B076D0002E3AB /* ISNavbarView.m */,
+				00C06B6316105444001501F0 /* NSBezierPath+Ext.h */,
+				00C06B6416105444001501F0 /* NSBezierPath+Ext.m */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		00E7A2771609A53C00DF8332 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				00E7A2811609BD4C00DF8332 /* divide.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,7 +196,6 @@
 				00876DC216099BC100D47EC9 /* InfoPlist.strings in Resources */,
 				00876DC816099BC100D47EC9 /* Credits.rtf in Resources */,
 				00876DCE16099BC100D47EC9 /* MainMenu.xib in Resources */,
-				00E7A2821609BD4C00DF8332 /* divide.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +211,7 @@
 				00E7A2721609A35A00DF8332 /* INAppStoreWindow.m in Sources */,
 				00E7A2761609A52D00DF8332 /* ISSeparatorLabel.m in Sources */,
 				0028DE77160B076D0002E3AB /* ISNavbarView.m in Sources */,
+				00C06B6516105444001501F0 /* NSBezierPath+Ext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

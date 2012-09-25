@@ -69,6 +69,8 @@
     ISSeparatorLabel * navButton = [[[ISSeparatorLabel alloc] initWithTitle:currentTitle] autorelease];
     NSRect frame = navButton.frame;
     frame.origin.x = startX;
+    frame.origin.y = 1;
+    frame.size.height = self.bounds.size.height - 1;
     navButton.frame = frame;
     navButton.target = self;
     navButton.action = @selector(pop:);
