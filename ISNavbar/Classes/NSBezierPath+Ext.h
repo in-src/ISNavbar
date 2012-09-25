@@ -1,10 +1,18 @@
 //
 //  NSBezierPath+Ext.h
-//  ISNavbar
 //
-//  Created by Robin Lu on 9/24/12.
-//  Copyright (c) 2012 IN-SRC Limit. All rights reserved.
-//
+
+//  This part of code is copied from DrawKit under following license
+
+///**********************************************************************************************************************************
+///  NSBezierPath-Geometry.h
+///  DrawKit ©2005-2008 Apptree.net
+///
+///  Created by graham on 22/10/2006.
+///
+///	 This software is released subject to licensing conditions as detailed in DRAWKIT-LICENSING.TXT, which must accompany this source file.
+///
+///**********************************************************************************************************************************
 
 #import <Cocoa/Cocoa.h>
 
