@@ -74,16 +74,22 @@
 
 - (void)drawDividorInRect:(NSRect)rect
 {
-    NSArray *colors = [NSArray arrayWithObjects:[NSColor colorWithSRGBRed:0.88 green:0.88 blue:0.88 alpha:0.1],
-                                                [NSColor colorWithSRGBRed:0.62 green:0.62 blue:0.62 alpha:1],
-                                                [NSColor colorWithSRGBRed:0.67 green:0.67 blue:0.67 alpha:0.1],nil];
+    NSArray *colors = [NSArray arrayWithObjects:[NSColor colorWithSRGBRed:0.67 green:0.67 blue:0.67 alpha:0],
+                                                [NSColor colorWithSRGBRed:0.55 green:0.55 blue:0.55 alpha:1],
+                                                [NSColor colorWithSRGBRed:0.5 green:0.5 blue:0.5 alpha:0.3],nil];
     const CGFloat locations[3] = {0.0, 0.5, 1.0};
     NSGradient *gradient = [[[NSGradient alloc] initWithColors:colors atLocations:locations colorSpace:[NSColorSpace sRGBColorSpace]] autorelease];
+    NSGradient *borderGradient = [[[NSGradient alloc] initWithColorsAndLocations:
+                                    [NSColor colorWithSRGBRed:0.94 green:0.94 blue:0.94 alpha:0.2], 0.0,
+                                    [NSColor colorWithSRGBRed:0.94 green:0.94 blue:0.94 alpha:0.9], 0.5,
+                                    [NSColor colorWithSRGBRed:0.94 green:0.94 blue:0.94 alpha:0], 1.0, nil] autorelease];
     NSBezierPath *path = [NSBezierPath bezierPath];
     [path moveToPoint:rect.origin];
     [path lineToPoint:NSMakePoint(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height / 2.0)];
     [path lineToPoint:NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height)];
     NSBezierPath *strokedPath = [path strokedPath];
+    NSBezierPath *borderPath = [strokedPath strokedPath];
+    [borderGradient drawInBezierPath:borderPath angle:90];
     [gradient drawInBezierPath:strokedPath angle:90];
 }
 
