@@ -74,9 +74,20 @@
 
 - (void)drawDividorInRect:(NSRect)rect
 {
-    NSArray *colors = [NSArray arrayWithObjects:[NSColor colorWithSRGBRed:0.67 green:0.67 blue:0.67 alpha:0],
-                                                [NSColor colorWithSRGBRed:0.55 green:0.55 blue:0.55 alpha:1],
-                                                [NSColor colorWithSRGBRed:0.5 green:0.5 blue:0.5 alpha:0.3],nil];
+    NSWindow *window = [self window];
+    BOOL drawsAsMainWindow = ([window isMainWindow] && [[NSApplication sharedApplication] isActive]);
+
+    NSArray *colors;
+    if (drawsAsMainWindow) {
+        colors    = [NSArray arrayWithObjects:[NSColor colorWithSRGBRed:0.65 green:0.65 blue:0.65 alpha:0],
+                     [NSColor colorWithSRGBRed:0.55 green:0.55 blue:0.55 alpha:1],
+                     [NSColor colorWithSRGBRed:0.5 green:0.5 blue:0.5 alpha:0.3],nil];
+    }
+    else {
+        colors    = [NSArray arrayWithObjects:[NSColor colorWithSRGBRed:0.9 green:0.9 blue:0.9 alpha:0],
+                     [NSColor colorWithSRGBRed:0.8 green:0.8 blue:0.8 alpha:1],
+                     [NSColor colorWithSRGBRed:0.8 green:0.8 blue:0.8 alpha:0.3],nil];
+    }
     const CGFloat locations[3] = {0.0, 0.5, 1.0};
     NSGradient *gradient = [[[NSGradient alloc] initWithColors:colors atLocations:locations colorSpace:[NSColorSpace sRGBColorSpace]] autorelease];
     NSGradient *borderGradient = [[[NSGradient alloc] initWithColorsAndLocations:

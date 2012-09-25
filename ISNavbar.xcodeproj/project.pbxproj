@@ -15,9 +15,9 @@
 		00876DCB16099BC100D47EC9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00876DCA16099BC100D47EC9 /* AppDelegate.m */; };
 		00876DCE16099BC100D47EC9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00876DCC16099BC100D47EC9 /* MainMenu.xib */; };
 		00A263E9160C52D8001089CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A263E8160C52D8001089CF /* QuartzCore.framework */; };
-		00C06B6516105444001501F0 /* NSBezierPath+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C06B6416105444001501F0 /* NSBezierPath+Ext.m */; };
 		00E7A2721609A35A00DF8332 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7A2711609A35A00DF8332 /* INAppStoreWindow.m */; };
 		00E7A2761609A52D00DF8332 /* ISSeparatorLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7A2751609A52D00DF8332 /* ISSeparatorLabel.m */; };
+		00FD2919161191DD0076CC25 /* NSBezierPath+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FD2918161191DD0076CC25 /* NSBezierPath+Ext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +37,12 @@
 		00876DCA16099BC100D47EC9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		00876DCD16099BC100D47EC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		00A263E8160C52D8001089CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		00C06B6316105444001501F0 /* NSBezierPath+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+Ext.h"; sourceTree = "<group>"; };
-		00C06B6416105444001501F0 /* NSBezierPath+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+Ext.m"; sourceTree = "<group>"; };
 		00E7A2701609A35A00DF8332 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAppStoreWindow.h; path = vendor/INAppStoreWindow/INAppStoreWindow.h; sourceTree = SOURCE_ROOT; };
 		00E7A2711609A35A00DF8332 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INAppStoreWindow.m; path = vendor/INAppStoreWindow/INAppStoreWindow.m; sourceTree = SOURCE_ROOT; };
 		00E7A2741609A52D00DF8332 /* ISSeparatorLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISSeparatorLabel.h; path = Classes/ISSeparatorLabel.h; sourceTree = "<group>"; };
 		00E7A2751609A52D00DF8332 /* ISSeparatorLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ISSeparatorLabel.m; path = Classes/ISSeparatorLabel.m; sourceTree = "<group>"; };
+		00FD2917161191DD0076CC25 /* NSBezierPath+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBezierPath+Ext.h"; path = "Classes/NSBezierPath+Ext.h"; sourceTree = "<group>"; };
+		00FD2918161191DD0076CC25 /* NSBezierPath+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBezierPath+Ext.m"; path = "Classes/NSBezierPath+Ext.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,6 @@
 		00876DA816099BC000D47EC9 = {
 			isa = PBXGroup;
 			children = (
-				00A263E8160C52D8001089CF /* QuartzCore.framework */,
 				00876DBD16099BC100D47EC9 /* ISNavbar */,
 				00876DB616099BC000D47EC9 /* Frameworks */,
 				00876DB416099BC000D47EC9 /* Products */,
@@ -79,6 +78,7 @@
 		00876DB616099BC000D47EC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00A263E8160C52D8001089CF /* QuartzCore.framework */,
 				00876DB716099BC000D47EC9 /* Cocoa.framework */,
 				00876DB916099BC100D47EC9 /* Other Frameworks */,
 			);
@@ -132,12 +132,12 @@
 		00E7A2731609A4E300DF8332 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				00FD2917161191DD0076CC25 /* NSBezierPath+Ext.h */,
+				00FD2918161191DD0076CC25 /* NSBezierPath+Ext.m */,
 				00E7A2741609A52D00DF8332 /* ISSeparatorLabel.h */,
 				00E7A2751609A52D00DF8332 /* ISSeparatorLabel.m */,
 				0028DE75160B076D0002E3AB /* ISNavbarView.h */,
 				0028DE76160B076D0002E3AB /* ISNavbarView.m */,
-				00C06B6316105444001501F0 /* NSBezierPath+Ext.h */,
-				00C06B6416105444001501F0 /* NSBezierPath+Ext.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 				00E7A2721609A35A00DF8332 /* INAppStoreWindow.m in Sources */,
 				00E7A2761609A52D00DF8332 /* ISSeparatorLabel.m in Sources */,
 				0028DE77160B076D0002E3AB /* ISNavbarView.m in Sources */,
-				00C06B6516105444001501F0 /* NSBezierPath+Ext.m in Sources */,
+				00FD2919161191DD0076CC25 /* NSBezierPath+Ext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
