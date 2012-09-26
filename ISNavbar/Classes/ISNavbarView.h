@@ -12,8 +12,11 @@
 
 @protocol ISNavbarDelegate <NSObject>
 
+@optional
 - (void)willPush;
 - (void)willPop;
+
+- (void)shouldPop;
 
 @end
 
@@ -37,6 +40,7 @@
 - (void)pushTitle:(NSString*)title;
 - (void)popTitle;
 - (void)popToTop;
+- (void)preparePopToTop;
 
 - (IBAction)pop:(id)sender;
 @end

@@ -45,6 +45,14 @@
     [super dealloc];
 }
 
+- (void)setTitleFieldFrame:(NSView*)titleField
+{
+    NSRect frame = [titleField frame];
+    frame.origin.x = (self.bounds.size.width - frame.size.width)/2.0;
+    frame.origin.y = (self.bounds.size.height - frame.size.height)/2.0;
+    [titleField setFrame:frame];
+}
+
 - (NSTextField *)buildTitleField:(NSString *)title
 {
     NSTextField *titleField = [[[NSTextField alloc] initWithFrame:NSZeroRect] autorelease];
@@ -57,21 +65,23 @@
     [titleField setFont:[NSFont systemFontOfSize:13]];
     [titleField setAutoresizingMask:NSViewMaxXMargin|NSViewMinXMargin];
     [titleField sizeToFit];
-    NSRect frame = [titleField frame];
-    frame.origin.x = (self.bounds.size.width - frame.size.width)/2.0;
-    frame.origin.y = (self.bounds.size.height - frame.size.height)/2.0;
-    [titleField setFrame:frame];
+    [self setTitleFieldFrame:titleField];
     return titleField;
 }
 
-- (ISSeparatorLabel *)buildNavButtonWithTitle:(NSString *)currentTitle
+- (void)setNavButtonFrame:(NSView*)navButton
 {
-    ISSeparatorLabel * navButton = [[[ISSeparatorLabel alloc] initWithTitle:currentTitle] autorelease];
     NSRect frame = navButton.frame;
     frame.origin.x = startX;
     frame.origin.y = 1;
     frame.size.height = self.bounds.size.height - 1;
     navButton.frame = frame;
+}
+
+- (ISSeparatorLabel *)buildNavButtonWithTitle:(NSString *)currentTitle
+{
+    ISSeparatorLabel * navButton = [[[ISSeparatorLabel alloc] initWithTitle:currentTitle] autorelease];
+    [self setNavButtonFrame:navButton];
     navButton.target = self;
     navButton.action = @selector(pop:);
     return navButton;
@@ -114,6 +124,7 @@
 
 - (void)popTitle
 {
+    GTMLoggerDebug(@"titles %@", titles);
     if ([titles count] == 0) {
         return;
     }
@@ -141,24 +152,31 @@
         [self removeView:currentLeftNavButton direction:REMOVE_TO_MID];
         currentLeftNavButton = nil;
     }
-    if ([titles count] > 2) {
+    if ([titles count] >= 2) {
         currentLeftNavButton = [self buildNavButtonWithTitle:[titles objectAtIndex:([titles count] - 2)]];
         [self addView:currentLeftNavButton direction:ADD_FROM_LEFT];
     }
     [NSAnimationContext endGrouping];
 }
 
-- (void)popToTop
+- (void)preparePopToTop
 {
     while ([titles count] > 2) {
         [titles removeLastObject];
     }
+}
+
+- (void)popToTop
+{
+    [self preparePopToTop];
     [self popTitle];
 }
 
 - (IBAction)pop:(id)sender
 {
-    [self popTitle];
+    if ([delegate respondsToSelector:@selector(shouldPop)]) {
+        [delegate shouldPop];
+    }
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -175,6 +193,8 @@
     [self setFrame:frame];
     [self setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
     [aWindow.titleBarView addSubview:self];
+    [self setNavButtonFrame:currentLeftNavButton];
+    [self setTitleFieldFrame:currentTitleField];
 }
 
 #pragma mark -
